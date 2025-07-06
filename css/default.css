@@ -1,0 +1,120 @@
+@keyframes slidedown {
+    from {
+      transform: translateY(-20%);
+      opacity: 0%;
+    }
+  
+    to {
+      transform: translateY(0%);
+      opacity: 100%;
+    }
+  }
+
+body {
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    font-family: "Helvetica Neue",
+    Arial,
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    Meiryo,
+    sans-serif;
+    font-weight: 500;
+}
+
+.chat-frame {
+    height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+.bubble {
+    margin-top: 2em;
+    animation-name: slidedown;
+    animation-duration: .3s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+    opacity: 100%;
+    transition: all .3s;
+    width: 700px;
+    box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.2);
+}
+.bubble-inner {
+    position: relative;
+    background-color: #222;
+    padding: 1em 1em 1em 1em;
+    color: #fff;
+    border-right: 4px solid #ffb700;
+    border-bottom: 4px solid #ffb700;
+}
+.bubble-inner:before {
+    content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: -35px;
+	bottom: -4px;
+	border: 18px solid;
+	border-color: transparent #ffb700 #ffb700 transparent;
+    box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.2);
+    z-index: -10;
+}
+
+.bubble.system .bubble-inner {
+    border-right: 4px solid #ff0051;
+    border-bottom: 4px solid #ff0051;
+}
+.bubble.system .bubble-inner:before {
+    border-color: transparent #ff0051 #ff0051 transparent;
+}
+
+
+.bubble[data-state="predisappear"] {
+    opacity: 80%;
+}
+.bubble[data-state="disappear"] {
+    opacity: 50%;
+}
+
+.username {
+    color: #fff;
+    z-index: 100;
+    border-bottom: 2px solid #ffb700; 
+    padding-bottom: 0.8em;
+    margin-bottom: 0.5em;
+}
+.bubble.system .username {
+    border-bottom: 2px solid #ff0051; 
+}
+
+.username img {
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+    vertical-align: middle;
+    width: 18px;
+    height: 18px;
+}
+
+.msg {
+    line-height: 1.5em;
+    line-break: anywhere;
+}
+.msg img {
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+    vertical-align: middle;
+}
+
+.msg .reply {
+    background-color: #ffb700;
+    padding: 0.2em 0.5em;
+    display: inline-block;
+    color: #222;
+    font-weight: 600;
+}
+.msg .url {
+    color: #ffb700;
+}

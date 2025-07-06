@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Pixelify+Sans:wght@400..700&display=swap');
+
+@keyframes slidedown {
+    from {
+      transform: translateY(-20%);
+      opacity: 0%;
+    }
+  
+    to {
+      transform: translateY(0%);
+      opacity: 100%;
+    }
+  }
+
+  html, body {
+    overflow: hidden;
+  }
+
+body {
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    font-family: "Pixelify Sans","DotGothic16", sans-serif;
+    font-weight: 400;
+    background: #222;
+    color: #fff;
+}
+
+.chat-frame {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column-reverse;
+    align-items: left;
+    padding: 1em;
+}
+
+.bubble {
+    opacity: 100%;
+    transition: all .3s;
+    /* border-bottom: 1px dashed #ff558b; */
+}
+.bubble-inner {
+    position: relative;
+    padding: 0.3em 0em;
+}
+
+.bubble.system .bubble-inner {
+    color: #ab0000;
+}
+
+.username {
+    display: inline;
+}
+.username::after {
+    content: ' : ';
+    display: inline;
+    margin-right: 0.5em;
+}
+
+
+.username img {
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+    vertical-align: middle;
+    width: 18px;
+    height: 18px;
+}
+
+.msg {
+    line-height: 1.5em;
+    line-break: anywhere;
+    display: inline;
+}
+.msg img {
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+    vertical-align: middle;
+}
+
+.msg .reply {
+    color: #fafafa;
+    text-decoration: underline;
+}
+.msg .url {
+    color: #fafafa;
+    text-decoration: underline;
+}

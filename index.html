@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>twitch chat test</title>
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/notebook.css">
+
+    <script src="js/comfy.js"></script>
+    <script src="js/betterttv.js"></script>
+    <script src="js/7tv.js"></script>
+    <script src="js/twitchbadge.js"></script>
+    <script src="js/bitscheer.js"></script>
+</head>
+
+<body>
+
+    <div id="chat-frame" class="chat-frame">
+    </div>
+    
+    <script src="js/functions.js"></script>
+
+    <script>
+
+        var arrignoreName = [
+            'blerp',
+            'Nightbot',
+            'Streamlabs',
+            'SoundAlerts',
+            'StreamElements',
+            'Sery_Bot'
+        ];
+
+        const theme = 'notebook';
+        const channel_name = 'kaicenat';
+        const banSystemUserName = 'Guard the Bonkstick';
+
+        window.addEventListener("load", (event) => {
+            ComfyJS.Init( channel_name );
+
+            ComfyJS.onChat = ( userName, message, flags, self, extra ) => {
+                if(arrignoreName.find((ignoreName) => ignoreName == userName) != undefined) {
+                    return;
+                }
+
+                userName = escapeHtml(userName);
+                message = escapeHtml(message);
+                let userBadgesHtml = createUserBadges(extra.userBadges, flags);
+                let userNameElmn = createUserNameElmn();
+                // let userNameElmn = createUserNameElmn(extra['userColor']);
+
+                let msgHtml = replaceMessage(message, extra.messageEmotes);
+                let msgElmn = createMsgElmn(msgHtml);
+
+                addBubble(userName, userNameElmn, userBadgesHtml, msgElmn, theme);
+
+                return;
+            }
+
+            ComfyJS.onCommand = ( userName, command, message, flags, extra ) => {
+                console.log('username: '+userName+' | command: '+command+' | msg: '+message);
+                // if(arrignoreName.find((ignoreName) => ignoreName == userName) != undefined) {
+                //     return;
+                // }
+
+                // userName = escapeHtml(userName);
+                // message = escapeHtml(message);
+                // let userBadgesHtml = createUserBadges(extra.userBadges, flags);
+                // let userNameElmn = createUserNameElmn();
+                // // let userNameElmn = createUserNameElmn(extra['userColor']);
+
+                // let msgHtml = replaceMessage(message, extra.messageEmotes);
+                // let msgElmn = createMsgElmn(msgHtml);
+
+                // addBubble(userName, userNameElmn, userBadgesHtml, msgElmn, theme);
+
+                return;
+            }
+
+            ComfyJS.onCheer = ( userName, message, bits, flags, extra ) => {
+                // console.log(`${userName} cheered ${bits}: ${message}`)
+                // console.log(extra);
+
+                userName = escapeHtml(userName);
+                message = escapeHtml(message);
+                let userBadgesHtml = createUserBadges(extra.userBadges, flags);
+                let userNameElmn = createUserNameElmn();
+                // let userNameElmn = createUserNameElmn(extra['userColor']);
+
+                let msgHtml = replaceMessage(message, extra.messageEmotes, bits);
+                let msgElmn = createMsgElmn(msgHtml);
+
+                addBubble(userName, userNameElmn, userBadgesHtml, msgElmn, theme);
+            }
+
+            ComfyJS.onSub = ( userName, message, subTierInfo, extra ) => {
+                // console.log(`${userName} subed: ${message}`)
+                // console.log(subTierInfo);
+                // console.log(extra);
+            }
+
+            // ComfyJS.onSubGift = ( gifterUser, streakMonths, recipientUser, senderCount, subTierInfo, extra ) => {
+            //     console.log(`${gifterUser} gifted ${recipientUser}`)
+            //     console.log(subTierInfo);
+            //     console.log(extra);
+            // }
+
+            ComfyJS.onTimeout = ( timedOutUsername, durationInSeconds ) => {
+                let userNameHtml = banSystemUserName;
+                let userNameElmn = createUserNameElmn();
+                
+                let msgHtml = `${timedOutUsername} got warned. Now you behave.`;
+                let msgElmn = createMsgElmn(msgHtml);
+
+                removeUserBubble(timedOutUsername);
+                addBubble(banSystemUserName, userNameElmn, '', msgElmn, theme, true);
+                return;
+            }
+
+            ComfyJS.onBan = ( bannedUsername ) => {
+                let userNameHtml = banSystemUserName;
+                let userNameElmn = createUserNameElmn();
+
+                let msgHtml = `${bannedUsername} got bonked. Be well.`;
+                let msgElmn = createMsgElmn(msgHtml);
+
+                removeUserBubble(bannedUsername);
+                addBubble(banSystemUserName, userNameElmn, '', msgElmn, theme, true);
+                return;
+            }
+
+        });
+       
+    </script>
+</body>
+</html>

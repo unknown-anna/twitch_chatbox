@@ -1,0 +1,155 @@
+@keyframes slidedown {
+    from {
+      transform: translateX(-40%);
+      opacity: 0%;
+    }
+  
+    to {
+      transform: translateX(0%);
+      opacity: 100%;
+    }
+  }
+
+body {
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    font-family: "Helvetica Neue",
+    Arial,
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    Meiryo,
+    sans-serif;
+    font-weight: 500;
+}
+
+.chat-frame {
+    height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+.bubble {
+    margin-top: 3em;
+    animation-name: slidedown;
+    animation-duration: .3s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+    opacity: 100%;
+    transition: all .3s;
+    width: 700px;
+    color: #fff;
+    position: relative;
+    /* border-left: 4px solid #ffd900; */
+    /* border-top: 4px solid #ffd900; */
+    
+}
+
+.bubble.bread:before {
+    content: '';
+    display: block;
+    height: 64px;
+    width: 64px;
+    background-image: url('../img/bread_syokupan_cheese.png');
+    background-position: center;
+    background-size: contain;
+    position: absolute;
+    top: -24px;
+    right: 0;
+    z-index: 100;
+
+}
+
+.bubble-inner {
+    position: relative;
+    padding: 1.3em 1em 1em 1em;
+    /* background-color: #222; */
+    background: url('../img/honeycomb.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+    clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 0% 100%);
+    border-bottom: 2px solid #1be1ff;   
+}
+
+.bubble.system .bubble-inner {
+    background-image: none;
+    background-color: #ffd900;
+    color: #222;
+    border-bottom: 11px dashed #222;
+    font-weight: 600;
+}
+
+.username-inner {
+    display: flex;
+    align-items: end;
+    position: absolute;
+    top: -30px;
+    left: -60px;
+    z-index: 100;
+}
+
+.username {
+    display: block;
+    background-color: #ffd900;
+    padding: 0.7em 1.5em 0.5em 2em;
+    font-size: 18px;
+    color: #222;
+    font-weight: 600;
+    border-bottom: 2px solid #1be1ff;
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 12% 100%);
+}
+.bubble.system .username {
+    background-color: #222;
+    border-bottom: 2px solid #222;
+    border-right: none;
+    color: #ffd900;
+}
+
+
+.badge {
+    display: flex;
+    align-items: center;
+}
+
+.badge .item {
+    display: block;
+    background-color: #222;
+    padding: 0.50em 0.5em 0.30em 0.5em;
+    border-right: 1px solid #444;
+    border-top: 4px solid #ffd900;
+}
+
+.badge .item img {
+    width: 18px;
+    height: 18px;
+    line-height: 0;
+}
+
+.msg {
+    line-height: 1.5em;
+    line-break: anywhere;
+    padding-left: 0.5em;
+    padding-right: 3em;
+}
+.msg img {
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+    vertical-align: middle;
+}
+
+.msg .reply {
+    /* background-color: #ffd900; */
+    /* padding: 0.2em 0.5em; */
+    display: inline-block;
+    color: #ffd900;
+    text-decoration: underline;
+    font-weight: 600;
+    /* font-size: 18px; */
+    /* margin: 0.3em 0em; */
+}
+.msg .url {
+    color: #ffd900;
+}
